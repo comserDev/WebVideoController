@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "AAGAG 비디오 컨트롤러",
+  "version": "1.0",
+  "description": "AAGAG 동영상에 재생 속도 슬라이더와 일시정지 버튼을 추가합니다.",
+    "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://aagag.com/*", "https://*.aagag.com/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_end"
+    }
+  ]
+}
