@@ -1,0 +1,17 @@
+Privacy Policy for AAGAG Video Controller
+
+1. Overview
+AAGAG Video Controller ("the Extension") is committed to protecting your privacy. This Privacy Policy explains our data practices regarding the Chrome Extension.
+
+2. Information Collection and Use
+- No Personal Data Collection: The Extension does NOT collect, store, log, or transmit any personal information, user identifiers, browsing history, or user data.
+- Local Operation Only: The Extension operates entirely within your local browser. It modifies the web page DOM on aagag.com solely to inject video playback speed controls and a play/pause button.
+
+3. Data Sharing and Third Parties
+Since no data is collected, we do not share, sell, or transfer any user data to third parties.
+
+4. Permissions
+The Extension requests host permissions for https://aagag.com/* strictly to run local content scripts that render the video control interface on video elements.
+
+5. Contact
+If you have any questions about this Privacy Policy, please contact the developer via the Chrome Web Store developer contact email.
