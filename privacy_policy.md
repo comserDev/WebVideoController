@@ -1,4 +1,4 @@
-# Privacy Policy for Universal Video Controller
+# Privacy Policy for Universal(AAGAG) Video Controller
 
 Last updated: 2026-08-03
 
