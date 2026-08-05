@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "범용 비디오 배속 컨트롤러",
-  "version": "1.2",
-  "description": "모든 웹사이트의 비디오 재생 속도를 간편하게 조절하고 컨트롤할 수 있는 확장프로그램입니다.",
+  "name": "웹(AAGAG) 비디오 컨트롤러",
+  "version": "1.2.0",
+  "description": "AAGAG을 비롯한 모든 웹사이트의 비디오 재생 속도를 간편하게 조절하고 컨트롤할 수 있는 확장프로그램입니다.",
   "permissions": ["activeTab"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
@@ -20,7 +20,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "aagag-video-controller@yourdomain.com",
+      "id": "web-video-controller@ogoo59.com",
       "data_collection_permissions": {
         "required": ["none"]
       }
