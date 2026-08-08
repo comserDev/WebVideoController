@@ -4,7 +4,7 @@ Last updated: 2026-08-09
 
 ## 1. Overview
 
-Universal (AAGAG) Video Controller ("the Extension") is committed to protecting user privacy. This Privacy Policy explains how the Extension handles user data.
+Web(AAGAG) Video Controller ("the Extension") is committed to protecting user privacy. This Privacy Policy explains how the Extension handles user data.
 
 ## 2. Information Collection and Use
 
