@@ -1,0 +1,268 @@
+.web-speed-controller-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: rgba(30, 41, 59, 0.94);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: #f8fafc;
+  padding: 9px 14px;
+  border-radius: 0 0 10px 10px;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+  box-sizing: border-box !important;
+  z-index: 2147483647 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+/* 기본: 영상 바로 아래 문서 흐름에 들어가는 바 */
+.web-speed-controller-container.web-speed-inline {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+/* 인라인 삽입이 안전하지 않은 사이트의 예외 폴백. 위치는 JS가 영상 아래로 맞춘다. */
+.web-speed-controller-container.web-speed-fallback {
+  position: fixed !important;
+  margin: 0 !important;
+  border-radius: 0 0 10px 10px;
+}
+
+.web-speed-controller-container.web-speed-compact {
+  gap: 7px;
+  padding: 7px 9px;
+  border-radius: 0 0 8px 8px;
+}
+
+.web-speed-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  /* 텍스트 라벨을 제거했으므로 정사각형에 가까운 작은 터치 타깃으로 유지한다. */
+  width: 34px;
+  min-width: 34px;
+  padding: 6px;
+  min-height: 32px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  touch-action: manipulation;
+}
+
+.web-speed-btn:hover {
+  background: #2563eb;
+}
+
+.web-speed-compact .web-speed-btn {
+  width: 30px;
+  min-width: 30px;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.web-speed-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.web-speed-compact .web-speed-slider-group {
+  gap: 6px;
+}
+
+.web-speed-slider {
+  flex: 1;
+  min-width: 36px;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: #475569;
+  accent-color: #10b981;
+  cursor: pointer;
+}
+
+.web-speed-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #10b981;
+  min-width: 42px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.web-speed-compact .web-speed-text {
+  font-size: 11px;
+  min-width: 34px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .web-speed-controller-container {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .web-speed-controller-container.web-speed-compact {
+    gap: 6px;
+    padding: 6px 8px;
+  }
+
+  .web-speed-btn,
+  .web-speed-compact .web-speed-btn {
+    min-width: 64px;
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .web-speed-slider-group,
+  .web-speed-compact .web-speed-slider-group {
+    gap: 7px;
+  }
+
+  .web-speed-slider {
+    min-width: 52px;
+    height: 8px;
+  }
+
+  .web-speed-text,
+  .web-speed-compact .web-speed-text {
+    min-width: 38px;
+    font-size: 12px;
+  }
+}
+
+/* 제3자 iframe은 iframe 바깥 아래에 요소를 만들 수 없으므로 내부 안전 모드. */
+.web-speed-controller-container.web-speed-embedded {
+  position: fixed !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+  opacity: 0.92 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   개발/모바일 테스트용 디버그 패널
+   기본은 작은 DBG 버튼만 보이며, 탭하면 상세 정보가 열린다.
+   -------------------------------------------------------------------------- */
+.wvc-debug-root {
+  position: fixed !important;
+  right: max(8px, env(safe-area-inset-right)) !important;
+  bottom: max(8px, env(safe-area-inset-bottom)) !important;
+  z-index: 2147483647 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  pointer-events: none !important;
+}
+
+.wvc-debug-toggle {
+  pointer-events: auto !important;
+  float: right !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid rgba(255,255,255,.45) !important;
+  border-radius: 999px !important;
+  background: rgba(15,23,42,.86) !important;
+  color: #fff !important;
+  min-width: 46px !important;
+  height: 32px !important;
+  padding: 0 9px !important;
+  margin: 0 !important;
+  font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
+}
+
+.wvc-debug-enabled .wvc-debug-toggle {
+  background: rgba(4,120,87,.95) !important;
+}
+
+.wvc-debug-panel {
+  display: none !important;
+}
+
+.wvc-debug-enabled .wvc-debug-panel {
+  display: block !important;
+  pointer-events: auto !important;
+  width: min(92vw, 390px) !important;
+  max-height: min(56vh, 420px) !important;
+  overflow: auto !important;
+  margin: 0 0 7px auto !important;
+  padding: 8px !important;
+  border: 1px solid rgba(148,163,184,.65) !important;
+  border-radius: 10px !important;
+  background: rgba(2,6,23,.93) !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,.45) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  backdrop-filter: blur(6px) !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+}
+
+.wvc-debug-header {
+  position: sticky !important;
+  top: 0 !important;
+  padding: 3px 4px 7px !important;
+  margin-bottom: 4px !important;
+  border-bottom: 1px solid rgba(148,163,184,.35) !important;
+  background: rgba(2,6,23,.96) !important;
+  color: #93c5fd !important;
+  font-weight: 800 !important;
+}
+
+.wvc-debug-row {
+  padding: 6px 4px !important;
+  border-bottom: 1px solid rgba(148,163,184,.18) !important;
+  overflow-wrap: anywhere !important;
+}
+
+.wvc-debug-row:last-child { border-bottom: 0 !important; }
+.wvc-debug-row b { color: #f8fafc !important; }
+.wvc-debug-row strong { color: #34d399 !important; }
+.wvc-debug-row span { color: #cbd5e1 !important; }
+.wvc-debug-empty { padding: 8px 4px !important; color: #94a3b8 !important; }
+
+.wvc-debug-title { color: #bfdbfe !important; font-weight: 900 !important; }
+.wvc-debug-env { margin-top: 2px !important; color: #94a3b8 !important; font-weight: 500 !important; }
+.wvc-debug-actions { display: flex !important; gap: 6px !important; margin-top: 7px !important; }
+.wvc-debug-actions button {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid rgba(148,163,184,.5) !important;
+  border-radius: 6px !important;
+  background: rgba(30,41,59,.95) !important;
+  color: #e2e8f0 !important;
+  padding: 6px 8px !important;
+  min-height: 30px !important;
+  font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+}
+.wvc-debug-primary { color: #f8fafc !important; font-weight: 800 !important; }
+.wvc-debug-reason { margin-top: 3px !important; color: #6ee7b7 !important; font-weight: 700 !important; }
+.wvc-debug-detail { margin-top: 2px !important; color: #cbd5e1 !important; overflow-wrap: anywhere !important; }
+
+/* 1.3.0 mobile stability fixes */
+.web-speed-controller-container {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+.web-speed-controller-container.web-speed-inline {
+  align-self: flex-start !important;
+}

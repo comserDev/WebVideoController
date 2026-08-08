@@ -1,19 +1,39 @@
-# Privacy Policy for Universal(AAGAG) Video Controller
+# Privacy Policy for Web(AAGAG) Video Controller
 
-Last updated: 2026-08-03
+Last updated: 2026-08-09
 
 ## 1. Overview
-Universal Video Controller ("the Extension") is committed to protecting user privacy. This Privacy Policy explains our data practices regarding the Chrome/Firefox Extension.
+
+Universal (AAGAG) Video Controller ("the Extension") is committed to protecting user privacy. This Privacy Policy explains how the Extension handles user data.
 
 ## 2. Information Collection and Use
-* **No Personal Data Collection:** The Extension does NOT collect, store, log, track, or transmit any personal information, user identifiers, browsing history, or website data.
-* **Local Operation Only:** The Extension operates entirely within your local browser. It modifies the web page DOM solely to inject video playback speed controls and play/pause buttons onto standard HTML5 video elements.
 
-## 3. Data Sharing and Third Parties
-Since no data is collected, we do not share, sell, or transfer any user data to third parties under any circumstances.
+The Extension does not collect, store, transmit, sell, or share any personal information or user data.
 
-## 4. Permissions
-The Extension requests host permissions for `<all_urls>` strictly to execute local content scripts that detect standard `<video>` elements across websites and attach the playback control interface.
+Specifically, the Extension does not collect:
 
-## 5. Contact
-If you have any questions about this Privacy Policy, please contact the developer via the extension store contact form.
+- Personal information
+- Browsing history
+- Website content
+- User identifiers
+- Usage analytics
+- Cookies
+- Any other personal or sensitive data
+
+The Extension operates entirely within the user's browser. It only injects a lightweight playback controller into HTML5 video elements to provide playback speed controls and playback buttons. All processing is performed locally on the user's device.
+
+## 3. Data Sharing
+
+Because no user data is collected, no information is shared, sold, transferred, or disclosed to any third party.
+
+## 4. Website Access
+
+The Extension runs content scripts on web pages containing HTML5 video elements so it can display the playback controller. No website data is collected, stored, or transmitted outside the user's browser.
+
+## 5. Changes to This Privacy Policy
+
+This Privacy Policy may be updated from time to time. Any changes will be reflected by updating the "Last updated" date above.
+
+## 6. Contact
+
+If you have any questions about this Privacy Policy, please contact the developer through the Chrome Web Store support page.

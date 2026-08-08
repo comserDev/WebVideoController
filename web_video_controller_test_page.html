@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Video Controller 1.3.0 테스트 페이지</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    background: #f4f4f4;
+    color: #111;
+  }
+  header {
+    position: sticky; top: 0; z-index: 9999;
+    background: rgba(20,20,20,.95); color: #fff;
+    padding: 12px 16px;
+    border-bottom: 1px solid #444;
+  }
+  header strong { display:block; font-size: 18px; }
+  header small { opacity:.8; }
+  main { max-width: 860px; margin: 0 auto; padding: 16px; }
+  section {
+    background: #fff;
+    margin: 0 0 18px;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+  }
+  h2 { margin: 0 0 6px; font-size: 18px; }
+  p.note { margin: 0 0 12px; font-size: 14px; color: #555; }
+  video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    background: #111;
+  }
+  .player-shell {
+    position: relative;
+    width: 100%;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .fake-controls {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 38px;
+    display:flex; align-items:center; gap:8px;
+    padding:0 10px;
+    color:#fff;
+    background: linear-gradient(transparent, rgba(0,0,0,.85));
+    pointer-events:none;
+    font-size:12px;
+  }
+  .fake-bar { flex:1; height:4px; background:#888; border-radius:3px; }
+  .multi video { margin-bottom: 10px; }
+  .flex-row {
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .flex-row .video-col { flex:1 1 auto; min-width:0; }
+  .flex-row .side {
+    width:120px;
+    flex:0 0 120px;
+    border:1px dashed #aaa;
+    padding:8px;
+    font-size:12px;
+  }
+  .grid-wrap {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 110px;
+    gap:10px;
+  }
+  .grid-side { border:1px dashed #aaa; padding:8px; font-size:12px; }
+  .linked-video {
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    border:2px dashed #c66;
+    padding:6px;
+  }
+  .small-gif-like {
+    width:220px;
+    max-width:70vw;
+  }
+  iframe {
+    width:100%;
+    height:260px;
+    border:1px solid #bbb;
+    background:white;
+  }
+  code {
+    background:#eee;
+    padding:1px 4px;
+    border-radius:4px;
+  }
+  .status {
+    display:inline-block;
+    margin-top:8px;
+    padding:4px 8px;
+    border-radius:999px;
+    background:#eee;
+    font-size:12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background:#111; color:#eee; }
+    section { background:#1b1b1b; border-color:#333; }
+    p.note { color:#bbb; }
+    code,.status { background:#2b2b2b; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <strong>Web Video Controller 1.3.0 테스트 페이지</strong>
+  <small>모바일/PC 레이아웃·다중 영상·움짤·iframe·flex/grid 검증용</small>
+</header>
+
+<main>
+<section>
+  <h2>1. 기본 HTML5 video</h2>
+  <p class="note">가장 기본적인 케이스. 컨트롤러가 영상 바로 아래, 같은 너비로 붙는지 확인.</p>
+  <video controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect width='100%25' height='100%25' fill='%23222'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='44' text-anchor='middle' dominant-baseline='middle'%3EBASIC VIDEO%3C/text%3E%3C/svg%3E"></video>
+</section>
+
+<section>
+  <h2>2. 자체 컨트롤 오버레이가 있는 플레이어</h2>
+  <p class="note">사이트 자체 컨트롤러와 겹치지 않고 플레이어 전체 아래에 붙는지 확인.</p>
+  <div class="player-shell">
+    <video controls preload="metadata" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect width='100%25' height='100%25' fill='%230b3550'/%3E%3Ctext x='50%25' y='45%25' fill='white' font-size='42' text-anchor='middle'%3ECUSTOM PLAYER%3C/text%3E%3C/svg%3E"></video>
+    <div class="fake-controls"><span>▶</span><div class="fake-bar"></div><span>HD</span><span>⚙</span></div>
+  </div>
+</section>
+
+<section class="multi">
+  <h2>3. 한 게시물에 video 3개</h2>
+  <p class="note">각 영상마다 독립적인 속도바가 붙는지 확인.</p>
+  <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23533'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='36' text-anchor='middle'%3EVIDEO 1%3C/text%3E%3C/svg%3E"></video>
+  <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23353'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='36' text-anchor='middle'%3EVIDEO 2%3C/text%3E%3C/svg%3E"></video>
+  <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23335'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='36' text-anchor='middle'%3EVIDEO 3%3C/text%3E%3C/svg%3E"></video>
+</section>
+
+<section>
+  <h2>4. 움짤형 video</h2>
+  <p class="note"><code>autoplay + muted + loop + controls 없음</code>. 기본적으로 속도바가 숨겨지고, 터치/클릭 시 활성화되는지 확인.</p>
+  <video class="small-gif-like" autoplay muted loop playsinline
+    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='270'%3E%3Crect width='100%25' height='100%25' fill='%23603'/%3E%3Ctext x='50%25' y='45%25' fill='white' font-size='30' text-anchor='middle'%3EGIF-LIKE MP4%3C/text%3E%3Ctext x='50%25' y='60%25' fill='white' font-size='18' text-anchor='middle'%3Etap me%3C/text%3E%3C/svg%3E"></video>
+  <span class="status">예상: 처음엔 숨김 → 영상 터치 후 표시</span>
+</section>
+
+<section>
+  <h2>5. Flex 레이아웃</h2>
+  <p class="note">영상 아래 삽입이 옆 칸으로 밀리지 않는지 확인.</p>
+  <div class="flex-row">
+    <div class="video-col">
+      <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23315'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='34' text-anchor='middle'%3EFLEX VIDEO%3C/text%3E%3C/svg%3E"></video>
+    </div>
+    <div class="side">오른쪽 사이드 영역</div>
+  </div>
+</section>
+
+<section>
+  <h2>6. Grid 레이아웃</h2>
+  <p class="note">Grid 셀 옆으로 속도바가 삽입되지 않고 안전한 위치를 택하는지 확인.</p>
+  <div class="grid-wrap">
+    <div>
+      <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23513'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='34' text-anchor='middle'%3EGRID VIDEO%3C/text%3E%3C/svg%3E"></video>
+    </div>
+    <div class="grid-side">그리드 사이드 영역</div>
+  </div>
+</section>
+
+<section>
+  <h2>7. 링크 내부 video</h2>
+  <p class="note"><code>&lt;a&gt;</code> 안에 video가 있는 위험 케이스. 컨트롤러가 링크 내부에 삽입되지 않아야 함.</p>
+  <a class="linked-video" href="#clicked">
+    <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23520'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='34' text-anchor='middle'%3ELINK WRAPPED VIDEO%3C/text%3E%3C/svg%3E"></video>
+  </a>
+</section>
+
+<section>
+  <h2>8. 깊게 중첩된 플레이어 래퍼</h2>
+  <p class="note">iMBC 같은 여러 겹 래퍼를 흉내 냄. 적절한 플레이어 셸을 찾아 그 아래에 붙는지 확인.</p>
+  <div class="layer1" style="padding:3px">
+    <div class="layer2" style="position:relative">
+      <div class="layer3 player-shell">
+        <div class="layer4">
+          <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect width='100%25' height='100%25' fill='%2304454a'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='40' text-anchor='middle'%3EDEEPLY NESTED PLAYER%3C/text%3E%3C/svg%3E"></video>
+        </div>
+        <div class="fake-controls"><span>▶</span><div class="fake-bar"></div><span>CC</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>9. iframe 내부 video</h2>
+  <p class="note">iframe 안에서는 바깥 DOM에 삽입할 수 없으므로 안전 모드가 적용되는지 확인.</p>
+  <iframe id="videoFrame" title="iframe video test"></iframe>
+</section>
+
+<section>
+  <h2>10. 동적 생성 video</h2>
+  <p class="note">SPA / AJAX처럼 페이지 로드 후 video가 생성되는 상황. 버튼을 눌러 생성 후 자동 탐지되는지 확인.</p>
+  <button id="addVideo" style="padding:10px 14px;font-size:16px">동적 video 추가</button>
+  <div id="dynamicArea" style="margin-top:12px"></div>
+</section>
+
+<section>
+  <h2>테스트 체크리스트</h2>
+  <p class="note">
+    ① 일반 영상은 바로 아래 같은 너비인지<br>
+    ② 사이트 자체 컨트롤과 겹치지 않는지<br>
+    ③ 0.1×부터 조절 가능한지<br>
+    ④ 여러 영상에 각각 독립적으로 붙는지<br>
+    ⑤ 움짤형은 처음 숨겨지는지<br>
+    ⑥ flex/grid/링크 내부에서 레이아웃이 깨지지 않는지<br>
+    ⑦ iframe·동적 생성 영상도 탐지하는지
+  </p>
+</section>
+</main>
+
+<script>
+const frame = document.getElementById('videoFrame');
+frame.srcdoc = `
+<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{margin:0;background:#111;color:white;font-family:sans-serif}video{display:block;width:100%;background:#222}</style>
+</head><body>
+<video controls playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23033'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='34' text-anchor='middle'%3EIFRAME VIDEO%3C/text%3E%3C/svg%3E"></video>
+</body></html>`;
+
+document.getElementById('addVideo').addEventListener('click', () => {
+  const wrap = document.createElement('div');
+  wrap.style.marginTop = '8px';
+  wrap.innerHTML = `<video controls playsinline
+    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23264'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='34' text-anchor='middle'%3EDYNAMIC VIDEO%3C/text%3E%3C/svg%3E"></video>`;
+  document.getElementById('dynamicArea').appendChild(wrap);
+});
+</script>
+</body>
+</html>

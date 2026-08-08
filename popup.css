@@ -1,0 +1,29 @@
+*{box-sizing:border-box}
+body{margin:0;width:320px;max-width:100vw;font:13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:#111820;color:#edf4ff}
+header{padding:14px 14px 12px;border-bottom:1px solid #2c3a49;background:#172230}
+header strong{display:block;font-size:17px;line-height:1.2}
+header span{display:block;margin-top:3px;color:#aebccd;font-size:12px}
+main{padding:12px}
+.status-card{overflow:hidden;border:1px solid #304255;border-radius:10px;background:#16202b}
+.status-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 12px}
+.status-row+.status-row{border-top:1px solid #29394a}
+.status-row span{color:#b9c8d8}
+.status-row strong{font-size:13px;color:#edf4ff}
+.message{min-height:36px;padding:10px 2px 8px;color:#aebccd;font-size:12px}
+.actions{display:flex;gap:8px}
+.actions button{flex:1;border:1px solid #44586c;border-radius:8px;background:#223244;color:#fff;padding:9px 7px;font-weight:650;cursor:pointer}
+.actions button:active{transform:translateY(1px)}
+.message.success{color:#79e6b5}
+.message.error{color:#ffc76b}
+@media(prefers-color-scheme:light){
+  body{background:#f6f8fa;color:#17202a}
+  header{background:#fff;border-color:#dde3e8}
+  header span,.message{color:#61707d}
+  .status-card{background:#fff;border-color:#d7dfe6}
+  .status-row+.status-row{border-color:#e1e7ec}
+  .status-row span{color:#61707d}
+  .status-row strong{color:#17202a}
+  .actions button{background:#fff;color:#17202a;border-color:#b8c3cc}
+  .message.success{color:#157347}
+  .message.error{color:#8a5a00}
+}
